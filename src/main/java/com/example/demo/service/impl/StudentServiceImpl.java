@@ -1,4 +1,5 @@
 package com.example.demo.service.impl;
+import com.example.demo.Exception.UserNotFoundException;
 import com.example.demo.entity.Student;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
@@ -34,6 +35,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
+    }
+
+    @Override
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElseThrow(() -> new UserNotFoundException("No student with this id found"));
     }
 }
 
